@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>תוכנית חופשים | Vacation Plan</title>
+    <meta name="description" content="צפה בתוכנית החופשים האישית שלך בלוח שנה אינטראקטיבי">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/png" href="./icon-192.png">
+    <link rel="apple-touch-icon" href="./icon-192.png">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
+</head>
+
+<body>
+    <div class="background-glow"></div>
+    <div class="app-container">
+
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="header-title-group">
+                    <h1>תוכנית חופשים</h1>
+                    <span class="subtitle">הזן את המספר האישי שלך לצפייה בתוכנית</span>
+                </div>
+                <div class="header-controls">
+                    <button id="theme-toggle" class="theme-btn" title="החלף מצב תצוגה">☀️</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Search Section -->
+        <section id="search-section" class="search-section">
+            <div class="glass-card search-card">
+                <div class="search-icon">🔍</div>
+                <h2>חיפוש תוכנית חופשים</h2>
+                <p>הזן את המספר האישי שלך בכדי לצפות בתוכנית החופשים</p>
+                <form id="search-form" class="search-form" autocomplete="off">
+                    <input type="text" id="id-input" class="glass-input" placeholder="מספר אישי..." inputmode="numeric" required>
+                    <button type="submit" class="btn-primary" id="search-btn">הצג תוכנית</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Content (hidden until search) -->
+        <div id="results-container" class="hidden">
+            <!-- User Info Bar -->
+            <section class="user-info-bar">
+                <div class="glass-card user-info-content">
+                    <div class="user-details">
+                        <div class="user-avatar" id="user-avatar"></div>
+                        <div>
+                            <div class="user-name" id="user-name"></div>
+                            <div class="user-id-label" id="user-id-label"></div>
+                        </div>
+                    </div>
+                    <div class="export-controls">
+                        <button class="btn-export" id="btn-pdf" title="הורדת PDF">
+                            <span>📄</span> PDF
+                        </button>
+                        <button class="btn-export" id="btn-ics" title="ייצוא ליומן">
+                            <span>📅</span> יומן (.ics)
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Dashboard -->
+            <section id="stats-section" class="stats-grid"></section>
+
+            <!-- Legend -->
+            <section class="legend-strip glass-card">
+                <span class="legend-title">מקראה:</span>
+                <span class="legend-item st-1"><span class="legend-dot st-1"></span> בבסיס</span>
+                <span class="legend-item st-0"><span class="legend-dot st-0"></span> בבית</span>
+                <span class="legend-item st-2"><span class="legend-dot st-2"></span> מחלה / גימלים</span>
+                <span class="legend-item st-3"><span class="legend-dot st-3"></span> חופש</span>
+                <span class="legend-item st-4"><span class="legend-dot st-4"></span> פיצול</span>
+                <span class="legend-item st-5"><span class="legend-dot st-5"></span> שוחרר</span>
+                <span class="legend-item st-empty"><span class="legend-dot st-empty"></span> לא הוזן</span>
+            </section>
+
+            <!-- Calendar -->
+            <section id="calendar-section" class="calendar-section">
+                <div id="month-nav" class="month-nav"></div>
+                <div id="calendars-container"></div>
+            </section>
+        </div>
+
+        <footer class="main-footer">
+            <p>&copy; 2026 תוכנית חופשים</p>
+        </footer>
+
+        <!-- Hidden PDF Export Container (List Style) -->
+        <div id="pdf-export-container" class="hidden-pdf"></div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+        <div class="loading-text">טוען תוכנית חופשים...</div>
+    </div>
+
+    <!-- Install Prompt -->
+    <div id="install-prompt" class="install-prompt hidden">
+        <div class="glass-card">
+            <span>📲 התקן כאפליקציה</span>
+            <button class="btn-install" id="btn-install">התקן</button>
+            <button class="btn-dismiss" id="btn-dismiss-install">&times;</button>
+        </div>
+    </div>
+
+    <script src="./main.js"></script>
+</body>
+
+</html>
