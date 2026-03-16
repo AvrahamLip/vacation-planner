@@ -438,12 +438,7 @@ function renderPdfList(days, name, id) {
     return `
       <tr>
         <td>${dateStr} (${dayOfWeek})</td>
-        <td>
-          <div class="pdf-status-cell">
-            <span class="pdf-dot" style="background-color: ${statusColor}"></span>
-            <span>${statusEmoji} ${statusLabel}</span>
-          </div>
-        </td>
+        <td>${statusEmoji} ${statusLabel}</td>
         <td>${holidayTitle}</td>
       </tr>
     `;
