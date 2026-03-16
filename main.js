@@ -395,9 +395,18 @@ btnPdf.addEventListener('click', () => {
       onclone: (clonedDoc) => {
         const target = clonedDoc.getElementById('pdf-export-container');
         if (target) {
+          target.style.position = 'static';
+          target.style.visibility = 'visible';
           target.style.display = 'block';
           target.classList.remove('hidden-pdf');
           target.classList.add('exporting-pdf-list');
+          
+          // Force light mode colors for the export container
+          const content = target.querySelector('.pdf-export-content');
+          if (content) {
+            content.style.backgroundColor = '#ffffff';
+            content.style.color = '#000000';
+          }
         }
       }
     },

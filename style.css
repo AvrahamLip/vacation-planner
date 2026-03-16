@@ -648,7 +648,11 @@ h1 {
 }
 /* ── PDF List Export Styles ── */
 .hidden-pdf {
-  display: none;
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .pdf-export-content {
@@ -691,6 +695,7 @@ h1 {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: right;
+  color: #000 !important;
 }
 
 .pdf-table th {
