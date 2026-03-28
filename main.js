@@ -107,7 +107,9 @@ async function fetchVacationPlan(id) {
       throw new Error('השרת החזיר תגובה לא תקינה');
     }
 
-    const data = await response.json();
+    const data = await response.json().catch(() => {
+      throw new Error('השרת החזיר נתונים לא תקינים');
+    });
     if (!data || typeof data !== 'object') throw new Error('לא נמצאו נתונים');
     currentData = data;
 
@@ -123,7 +125,11 @@ async function fetchVacationPlan(id) {
     renderUserInfo(data, id);
     renderStats(parsedDays);
     renderCalendars(parsedDays);
+    
+    // UI Transitions
     resultsContainer.classList.remove('hidden');
+    document.getElementById('search-section').classList.add('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   } catch (error) {
     console.error('Error:', error);
     resultsContainer.classList.add('hidden');
@@ -396,17 +402,12 @@ btnPdf.addEventListener('click', () => {
         const target = clonedDoc.getElementById('pdf-export-container');
         if (target) {
           target.style.position = 'static';
+          target.style.left = '0';
           target.style.visibility = 'visible';
-          target.style.display = 'block';
-          target.classList.remove('hidden-pdf');
-          target.classList.add('exporting-pdf-list');
-          
-          // Force light mode colors for the export container
-          const content = target.querySelector('.pdf-export-content');
-          if (content) {
-            content.style.backgroundColor = '#ffffff';
-            content.style.color = '#000000';
-          }
+          target.style.height = 'auto';
+          target.style.opacity = '1';
+          target.style.margin = '0';
+          target.style.padding = '0';
         }
       }
     },
@@ -414,7 +415,10 @@ btnPdf.addEventListener('click', () => {
     pagebreak: { mode: ['avoid-all', 'css'] },
   };
 
-  html2pdf().set(opt).from(element).save();
+  // Give the browser a moment to render the content before capturing
+  setTimeout(() => {
+    html2pdf().set(opt).from(element).save();
+  }, 100);
 });
 
 function renderPdfList(days, name, id) {
