@@ -111,8 +111,12 @@ body {
 
 /* ── Header ── */
 .main-header {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   animation: fadeInDown 0.8s ease-out;
+}
+
+@media (max-width: 480px) {
+  .main-header { margin-bottom: 0.8rem; }
 }
 
 .header-content {
@@ -259,8 +263,8 @@ h1 {
 /* ── Layout & Sections ── */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1.2rem;
 }
 
 .stat-card {
@@ -281,22 +285,25 @@ h1 {
 .stat-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
 
 .legend-strip {
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 1rem;
-  padding: 1rem;
-  font-size: 0.85rem;
+  gap: 0.8rem;
+  padding: 1.2rem 0.5rem;
+  font-size: 0.8rem;
+  min-height: 60px;
 }
 
 .legend-title { font-weight: 700; color: var(--text-muted); margin-left: 0.5rem; }
 
 .legend-item {
-  display: flex;
+  display: inline-flex !important;
   align-items: center;
-  gap: 0.5rem;
-  color: var(--text-color);
+  gap: 0.4rem;
+  color: var(--text-color) !important;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .legend-dot {
@@ -561,67 +568,77 @@ h1 {
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .app-container {
-    padding: 0.75rem;
-    gap: 1rem;
+    padding: 0.5rem;
+    gap: 0.8rem;
   }
 
   .header-content {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1rem;
+    gap: 0.8rem;
   }
 
-  h1 { font-size: 1.8rem; }
-  .subtitle { font-size: 0.85rem; }
+  h1 { font-size: 1.6rem; }
+  .subtitle { font-size: 0.8rem; }
 
-  .search-card { padding: 1.5rem 1rem; }
-  .search-form { flex-direction: column; }
+  .search-card { padding: 1.2rem 0.8rem; }
+  .search-form { gap: 0.8rem; }
 
   .calendar-day {
-    min-height: 65px;
-    border-radius: 8px;
-    font-size: 0.75rem;
+    min-height: 60px;
+    border-radius: 6px;
+    font-size: 0.7rem;
   }
 
-  .calendar-day .day-number { font-size: 0.9rem; }
-  .calendar-day .day-status { font-size: 0.6rem; }
-  .calendar-day .day-holiday { font-size: 0.55rem; }
+  .calendar-day .day-number { font-size: 0.85rem; }
+  .calendar-day .day-status { font-size: 0.55rem; }
+  .calendar-day .day-holiday { font-size: 0.5rem; }
 
   .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
+    grid-template-columns: repeat(2, minmax(100px, 140px)) !important;
+    justify-content: center;
+    gap: 0.4rem;
   }
 
-  .stat-card { padding: 0.75rem 0.4rem; }
-  .stat-value { font-size: 1.4rem; }
-  .stat-label { font-size: 0.7rem; }
+  .stat-card { 
+    padding: 0.6rem 0.3rem;
+    min-width: 0 !important;
+  }
+  .stat-value { font-size: 1.3rem; }
+  .stat-label { font-size: 0.65rem; }
 
   .user-info-content {
-    flex-direction: column;
-    text-align: center;
-    gap: 1.2rem;
-    padding: 1.2rem 1rem;
+    gap: 0.8rem;
+    padding: 1rem 0.6rem;
   }
 
-  .user-details { flex-direction: column; gap: 0.8rem; }
-  .user-avatar { width: 45px; height: 45px; font-size: 1.2rem; }
-  .export-controls { justify-content: center; width: 100%; }
-  .btn-export { flex: 1; justify-content: center; }
+  .user-avatar { width: 40px; height: 40px; font-size: 1.1rem; }
+  .btn-export { font-size: 0.8rem; padding: 0.4rem 0.6rem; }
 
   .legend-strip {
-    gap: 0.6rem;
-    font-size: 0.75rem;
-    justify-content: center;
-    padding: 0.8rem 0.5rem;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    padding: 0.6rem 0.3rem;
   }
 }
 
 @media (max-width: 480px) {
   .calendar-day {
-    min-height: 52px;
-    padding: 2px;
+    min-height: 48px;
+    padding: 1px;
   }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .search-card h2 { font-size: 1.4rem; }
+  .search-card p { font-size: 0.8rem; }
+}
+
+@media (max-width: 350px) {
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .search-form { flex-direction: column; width: 100%; }
 }
 
 /* ── PWA Install Prompt ── */

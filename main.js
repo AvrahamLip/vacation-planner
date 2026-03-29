@@ -33,8 +33,17 @@ const resultsContainer = document.getElementById('results-container');
 const statsSection = document.getElementById('stats-section');
 const monthNav = document.getElementById('month-nav');
 const calendarsContainer = document.getElementById('calendars-container');
-const loadingOverlay = document.getElementById('loading-overlay');
-const themeToggle = document.getElementById('theme-toggle');
+function showLoading(show) {
+  const overlay = document.getElementById('loading-overlay');
+  console.log(`[DEBUG] showLoading: ${show}`);
+  if (show) {
+    overlay.classList.remove('hidden');
+    overlay.style.display = 'flex'; // Force display flex for centering
+  } else {
+    overlay.classList.add('hidden');
+    overlay.style.display = 'none';
+  }
+}
 const userAvatar = document.getElementById('user-avatar');
 const userName = document.getElementById('user-name');
 const userIdLabel = document.getElementById('user-id-label');
@@ -127,13 +136,19 @@ async function fetchVacationPlan(id) {
     renderCalendars(parsedDays);
     
     // UI Transitions
+    console.log('[DEBUG] Rendering complete. Transitioning UI...');
     resultsContainer.classList.remove('hidden');
-    document.getElementById('search-section').classList.add('hidden');
+    const searchSection = document.getElementById('search-section');
+    if (searchSection) {
+        searchSection.classList.add('hidden');
+        searchSection.style.display = 'none'; // Force hide
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } catch (error) {
-    console.error('Error:', error);
+    console.error('[DEBUG] Fetch error:', error);
     resultsContainer.classList.add('hidden');
-    showError(error.message);
+    showLoading(false);
+    alert(error.message);
   } finally {
     showLoading(false);
   }
@@ -156,6 +171,14 @@ function parseDates(data) {
 
       const date = new Date(year, month, day);
       const strValue = String(value).trim();
+
+      /*
+      .stats-grid {
+        grid-template-columns: repeat(2, 110px) !important;
+        justify-content: center;
+        gap: 0.4rem;
+      }
+      */
 
       days.push({
         date,
@@ -392,6 +415,26 @@ btnPdf.addEventListener('click', () => {
   const opt = {
     margin: [10, 10, 10, 10],
     filename: `תוכנית_חופשים_${name}.pdf`,
+    /*
+    .legend-item {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-color) !important;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .legend-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      padding: 1.2rem 0.5rem;
+      font-size: 0.8rem;
+      min-height: 60px;
+    }
+    */
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { 
       scale: 2, 
@@ -552,13 +595,6 @@ function showError(message) {
   errorEl.textContent = `⚠️ ${message}`;
   searchCard.appendChild(errorEl);
   setTimeout(() => errorEl.remove(), 5000);
-}
-
-// ══════════════════════════════════════════
-//  Loading
-// ══════════════════════════════════════════
-function showLoading(show) {
-  loadingOverlay.classList.toggle('hidden', !show);
 }
 
 // ══════════════════════════════════════════
