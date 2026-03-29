@@ -33,6 +33,7 @@ const resultsContainer = document.getElementById('results-container');
 const statsSection = document.getElementById('stats-section');
 const monthNav = document.getElementById('month-nav');
 const calendarsContainer = document.getElementById('calendars-container');
+const themeToggle = document.getElementById('theme-toggle');
 function showLoading(show) {
   const overlay = document.getElementById('loading-overlay');
   console.log(`[DEBUG] showLoading: ${show}`);
