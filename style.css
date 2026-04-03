@@ -1,48 +1,67 @@
-@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap');
 
 :root {
-  --bg-color: #0f172a;
-  --card-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  /* Core palette - Matches דוח1 Military Theme */
+  --bg-color: #f1f5f9;
+  --foreground: #0f172a;
+  --card-bg: #ffffff;
+  --glass-border: #e2e8f0;
+  --text-color: #0f172a;
+  --text-muted: #64748b;
+  
+  --primary: #1a365d; /* 213 55% 24% */
+  --primary-light: #2a4365;
+  --primary-glow: #3182ce;
+  --accent-color: #c084fc; /* Keeping a hint of purple for flair, but toned down */
+  --military-gold: #b45309; /* Matches דוח1 accent */
+  
+  --success: #15803d;
+  --warning: #1e40af; /* Home blue */
+  --danger: #b91c1c; /* Sick red */
+  
+  --font-family: 'Heebo', sans-serif;
+  
+  /* Status colors from דוח1 */
+  --st-base: #15803d;
+  --st-base-bg: #f0fdf4;
+  --st-home: #1e40af;
+  --st-home-bg: #eff6ff;
+  --st-sick: #dc2626;
+  --st-sick-bg: #fef2f2;
+  --st-other: #64748b;
+  --st-other-bg: #f1f5f9;
+  
+  --gradient-hero: linear-gradient(135deg, #1a365d, #2d3748);
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-elevated: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* ── Dark Mode ── */
+body.dark-mode {
+  --bg-color: #0b0f19;
+  --foreground: #f8fafc;
+  --card-bg: #111827;
+  --glass-border: #1f2937;
   --text-color: #f8fafc;
   --text-muted: #94a3b8;
-  --primary-glow: #6366f1;
-  --secondary-glow: #a855f7;
-  --accent-color: #818cf8;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --danger: #ef4444;
-  --font-family: 'Assistant', sans-serif;
   
-  /* Adapted for vacation plan */
-  --split: #f59e0b;
-  --released: #8b5cf6;
-  --empty-cell: rgba(255, 255, 255, 0.02);
-  --header-gradient: linear-gradient(to right, #818cf8, #c084fc);
+  --primary: #f59e0b; /* Gold as primary in dark mode for contrast */
+  --gradient-hero: linear-gradient(135deg, #0f172a, #1e293b);
+  
+  --st-base-bg: rgba(21, 128, 61, 0.2);
+  --st-home-bg: rgba(30, 64, 175, 0.2);
+  --st-sick-bg: rgba(220, 38, 38, 0.2);
 }
 
 /* ── Light Mode ── */
-body.light-mode {
-  --bg-color: #f1f5f9;
-  --card-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(0, 0, 0, 0.08);
-  --text-color: #1e293b;
-  --text-muted: #64748b;
-  --accent-color: #6366f1;
-  --primary-glow: #818cf8;
-  --empty-cell: rgba(0, 0, 0, 0.02);
-}
-
-body.light-mode .background-glow {
+body.dark-mode .background-glow {
   background:
-    radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
+    radial-gradient(circle at 20% 20%, rgba(30, 64, 175, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(180, 83, 9, 0.1) 0%, transparent 40%);
 }
 
 body.light-mode .glass-card {
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-  border-color: rgba(0, 0, 0, 0.06);
+  background: #ffffff;
 }
 
 body.light-mode .glass-input {
@@ -112,6 +131,10 @@ body {
 /* ── Header ── */
 .main-header {
   margin-bottom: 1.5rem;
+  background: var(--gradient-hero);
+  padding: 2.5rem 1.5rem;
+  border-radius: 0 0 2rem 2rem;
+  box-shadow: var(--shadow-elevated);
   animation: fadeInDown 0.8s ease-out;
 }
 
@@ -134,11 +157,8 @@ body {
 
 h1 {
   font-size: clamp(1.8rem, 5vw, 2.8rem);
-  font-weight: 700;
-  background: var(--header-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+  color: #ffffff;
   line-height: 1.1;
   text-align: center;
 }
@@ -172,19 +192,16 @@ h1 {
 .glass-card {
   background: var(--card-bg);
   border: 1px solid var(--glass-border);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: 20px;
+  border-radius: 1.5rem;
   padding: 1.5rem;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   animation: fadeInUp 0.6s ease-out backwards;
 }
 
 .glass-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
-  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-elevated);
 }
 
 .glass-input {
@@ -316,21 +333,21 @@ h1 {
 }
 
 /* Legend colors matching doch! */
-.legend-item.st-1 { color: #34d399; }
-.legend-item.st-0 { color: #fbbf24; }
-.legend-item.st-2 { color: #f87171; }
-.legend-item.st-3 { color: #fbbf24; }
-.legend-item.st-4 { color: #fbbf24; }
-.legend-item.st-5 { color: #a78bfa; }
-.legend-item.st-empty { color: #94a3b8; }
+.legend-item.st-1 { color: var(--st-base); }
+.legend-item.st-0 { color: var(--st-home); }
+.legend-item.st-2 { color: var(--st-sick); }
+.legend-item.st-3 { color: var(--st-home); }
+.legend-item.st-4 { color: var(--st-home); }
+.legend-item.st-5 { color: var(--st-other); }
+.legend-item.st-empty { color: var(--text-muted); }
 
-.st-1 { background: #34d399; } /* Base */
-.st-0 { background: #fbbf24; } /* Home */
-.st-2 { background: #f87171; } /* Sick */
-.st-3 { background: #fbbf24; } /* Vacation */
-.st-4 { background: #fbbf24; } /* Split */
-.st-5 { background: #a78bfa; } /* Released */
-.st-empty { background: #94a3b8; }
+.st-1 { background: var(--st-base); } 
+.st-0 { background: var(--st-home); } 
+.st-2 { background: var(--st-sick); } 
+.st-3 { background: var(--st-home); } 
+.st-4 { background: var(--st-home); } 
+.st-5 { background: var(--st-other); } 
+.st-empty { background: var(--text-muted); }
 
 /* ── Calendar ── */
 .calendar-section { margin-top: 1rem; }
@@ -406,12 +423,12 @@ h1 {
 .calendar-day .day-holiday { font-size: 0.6rem; color: var(--accent-color); text-align: center; margin-top: 4px; padding: 0 4px; }
 
 /* Status Styles adjusted to match doch! badge colors */
-.calendar-day.status-1 { color: #34d399; background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); }
-.calendar-day.status-0 { color: #fbbf24; background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.4); }
-.calendar-day.status-2 { color: #f87171; background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); }
-.calendar-day.status-3 { color: #fbbf24; background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.4); }
-.calendar-day.status-4 { color: #fbbf24; background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.4); }
-.calendar-day.status-5 { color: #a78bfa; background: rgba(139, 92, 246, 0.15); border-color: rgba(139, 92, 246, 0.4); }
+.calendar-day.status-1 { color: var(--st-base); background: var(--st-base-bg); border-color: rgba(21, 128, 61, 0.2); }
+.calendar-day.status-0 { color: var(--st-home); background: var(--st-home-bg); border-color: rgba(30, 64, 175, 0.2); }
+.calendar-day.status-2 { color: var(--st-sick); background: var(--st-sick-bg); border-color: rgba(220, 38, 38, 0.2); }
+.calendar-day.status-3 { color: var(--st-home); background: var(--st-home-bg); border-color: rgba(30, 64, 175, 0.2); }
+.calendar-day.status-4 { color: var(--st-home); background: var(--st-home-bg); border-color: rgba(30, 64, 175, 0.2); }
+.calendar-day.status-5 { color: var(--st-other); background: var(--st-other-bg); border-color: rgba(100, 116, 139, 0.2); }
 
 .calendar-day.today {
   border: 2px solid var(--accent-color);

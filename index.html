@@ -6,51 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>תוכנית חופשים | Vacation Plan</title>
     <meta name="description" content="צפה בתוכנית החופשים האישית שלך בלוח שנה אינטראקטיבי">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#1a365d">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="manifest" href="./manifest.json">
     <link rel="icon" type="image/png" href="./icon-192.png">
     <link rel="apple-touch-icon" href="./icon-192.png">
-    <link rel="stylesheet" href="./style.css?v=1774">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css?v=1775-military">
     <style>
         /* Urgent Mobile Overrides - Injected to bypass cache */
         @media (max-width: 768px) {
-            .search-section.hidden { display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; justify-content: center !important; }
-            .stat-card { min-width: 0 !important; padding: 10px 5px !important; }
-            .stats-grid { 
-                display: grid !important; 
-                grid-template-columns: repeat(2, 1fr) !important; 
-                gap: 8px !important; 
-                justify-content: center !important; 
-            }
-            .stat-card { min-width: 0 !important; padding: 12px 5px !important; }
-            .stat-label { font-size: 0.65rem !important; }
-            .legend-strip { 
-                display: flex !important; 
-                flex-wrap: wrap !important; 
-                justify-content: center !important; 
-                gap: 10px 15px !important; 
-                padding: 20px 10px !important; 
-                background: rgba(0,0,0,0.1) !important; 
-                border-radius: 12px !important;
-                margin-top: 10px !important;
-            }
-            .legend-item { 
-                display: inline-flex !important; 
-                align-items: center !important; 
-                color: var(--text-color) !important; 
-                font-weight: 700 !important; 
-                font-size: 13px !important; 
-                white-space: nowrap !important;
-                opacity: 1 !important;
-                visibility: visible !important;
-            }
-            body.light-mode .legend-item { color: #1e293b !important; }
-        }
-        @media (max-width: 380px) {
-            .stats-grid { grid-template-columns: 1fr !important; }
+            .search-section.hidden { display: none !important; }
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
@@ -65,8 +34,18 @@
             <div class="header-content">
                 <div class="header-title-group">
                     <h1>תוכנית חופשים</h1>
-                    <span class="subtitle">הזן את המספר האישי שלך לצפייה בתוכנית</span>
+                    <span class="subtitle">מערכת דיווחי 1 — ניהול חופשות</span>
                 </div>
+                <nav class="header-nav">
+                    <a href="https://avrahamlip.github.io/3-979/guards" class="nav-btn" target="_blank">
+                        <span class="nav-icon">🛡️</span>
+                        <span class="nav-text">תוכנית שמירות</span>
+                    </a>
+                    <a href="https://avrahamlip.github.io/3-979/contact" class="nav-btn" target="_blank">
+                        <span class="nav-icon">📞</span>
+                        <span class="nav-text">אנשי קשר</span>
+                    </a>
+                </nav>
                 <div class="header-controls">
                     <button id="theme-toggle" class="theme-btn" title="החלף מצב תצוגה">☀️</button>
                 </div>
@@ -131,7 +110,12 @@
         </div>
 
         <footer class="main-footer">
-            <p>&copy; 2026 תוכנית חופשים</p>
+            <div class="footer-links">
+                <a href="https://avrahamlip.github.io/3-979/guards" target="_blank">תוכנית שמירות</a>
+                <span class="footer-sep">|</span>
+                <a href="https://avrahamlip.github.io/3-979/contact" target="_blank">אנשי קשר</a>
+            </div>
+            <p>&copy; 2026 מערכת דיווחי 1 — תוכנית חופשים</p>
         </footer>
 
         <!-- Hidden PDF Export Container (List Style) -->
